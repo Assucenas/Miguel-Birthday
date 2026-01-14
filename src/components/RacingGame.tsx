@@ -32,7 +32,7 @@ export const RacingGame = () => {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const pathPoints = useRef(generateMessagePath());
   
-  const pointsPerLetter = 11; // 11 points per letter (0 to 10 inclusive)
+  const pointsPerLetter = 2; // 2 points per letter (0 to 10 inclusive)
   const totalLetters = MESSAGE.length;
   
   useEffect(() => {
@@ -77,7 +77,7 @@ export const RacingGame = () => {
         
         return next;
       });
-    }, 50);
+    }, 40);
     
     return () => clearInterval(interval);
   }, [gameState, totalLetters]);
@@ -149,12 +149,20 @@ export const RacingGame = () => {
       <Track path={visiblePath} />
       
       {/* Revealed message text */}
-      <div className="absolute top-4 left-1/2 transform -translate-x-1/2 z-20">
-        <h1 className="text-3xl md:text-5xl font-bold text-white drop-shadow-lg tracking-wide">
-          {MESSAGE.slice(0, revealedLetters)}
-          <span className="animate-pulse">|</span>
-        </h1>
-      </div>
+<div className="absolute top-4 left-1/2 transform -translate-x-1/2 z-20">
+  <h1 className="text-3xl md:text-5xl font-bold text-white drop-shadow-lg tracking-wide">
+    <span
+      className="inline-block overflow-hidden align-bottom transition-[width] duration-100 ease-linear"
+      style={{ width: `${(revealedLetters / MESSAGE.length) * 100}%` }}
+    >
+      <span className="whitespace-nowrap">{MESSAGE}</span>
+    </span>
+
+    {/* “caret” diferente do | (uma barrinha) */}
+    <span className="ml-2 inline-block w-[6px] h-[0.9em] bg-white/90 rounded-sm animate-pulse align-bottom" />
+  </h1>
+</div>
+
       
       {/* Car */}
       <Car 
