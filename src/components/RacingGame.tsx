@@ -6,38 +6,18 @@ import { FinalScreen } from './FinalScreen';
 
 const MESSAGE = "Feliz Aniversário Miguel";
 
-// Path points that form the letters - simplified cursive style
+// Path points - straight horizontal line
 const generateMessagePath = (): { x: number; y: number }[] => {
   const points: { x: number; y: number }[] = [];
   const startX = 50;
-  const startY = 300;
-  const letterWidth = 35;
-  const letterHeight = 60;
+  const y = 350; // Fixed Y position for straight line
+  const totalWidth = 700;
+  const totalPoints = MESSAGE.length * 11; // 11 points per letter
   
-  let currentX = startX;
-  let currentY = startY;
-  
-  // Generate path for each character
-  MESSAGE.split('').forEach((char, charIndex) => {
-    const baseX = startX + charIndex * letterWidth;
-    
-    // Wrap to new line after certain characters
-    const charsPerLine = 12;
-    const lineIndex = Math.floor(charIndex / charsPerLine);
-    const charInLine = charIndex % charsPerLine;
-    
-    const adjustedX = startX + charInLine * letterWidth;
-    const adjustedY = startY + lineIndex * (letterHeight + 40);
-    
-    // Create wavy path for each letter position
-    for (let i = 0; i <= 10; i++) {
-      const progress = i / 10;
-      const x = adjustedX + progress * letterWidth * 0.8;
-      const waveOffset = Math.sin(progress * Math.PI * 2 + charIndex) * 15;
-      const y = adjustedY + waveOffset;
-      points.push({ x, y });
-    }
-  });
+  for (let i = 0; i <= totalPoints; i++) {
+    const x = startX + (i / totalPoints) * totalWidth;
+    points.push({ x, y });
+  }
   
   return points;
 };
