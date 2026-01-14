@@ -57,6 +57,14 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+        // Racing game colors
+        game: {
+          grass: "hsl(var(--game-grass))",
+          "grass-dark": "hsl(var(--game-grass-dark))",
+          track: "hsl(var(--game-track))",
+          line: "hsl(var(--game-line))",
+          car: "hsl(var(--game-car))",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
